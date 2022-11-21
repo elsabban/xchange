@@ -1,0 +1,31 @@
+@import '/src/assets/css/variables';
+.home {
+    h1 {
+        font-size: 30px;
+        font-weight: bold;
+        margin: 20px 5px;
+        text-align: center;
+        color:$mainRed
+    }
+    .varous-coversion {
+        .side {
+            width: 40%;
+            border-radius: 10px;
+            background-color: $white;
+            box-shadow: 0px 5px 5px rgb(0 0 0 / 18%);
+            padding: 10px;
+            margin: 10px;
+            ul {
+                li {
+                    margin-bottom: 15px;
+                    font-size: 18px;
+                    font-weight: bold;
+
+                    .left {
+                        color:$gold
+                    }
+                }
+            }
+        }
+    }
+}

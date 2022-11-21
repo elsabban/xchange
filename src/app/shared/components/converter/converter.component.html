@@ -1,0 +1,42 @@
+<div class="converter-container">
+    <form [formGroup]="converterForm" (submit)="convert(converterForm)">
+        <div class="form-group  d-flex justify-content-center align-items-end">
+            <div class="form-control">
+                <label for="">Amount :</label>
+                <input (input)="convert(converterForm)" type="number" formControlName="amount" class="w-100" placeholder="Amount">
+            </div>
+            <div class="form-control">
+                <label for="">From :</label>
+                <ng-select formControlName="from" [items]="options"
+                    [searchable]="true" 
+                    placeholder="select currency" 
+                    [clearable]="false"
+                    >
+                </ng-select>
+             </div>
+             <div (click)="switch()" class="switch">
+                <img class="img-fit" src="assets/img/swap.png" alt="" srcset="">
+             </div>
+             <div class="form-control">
+                <label for="">To :</label>
+                <ng-select formControlName="to" [items]="options"
+                    [searchable]="true"
+                    [clearable]="false"
+                    >
+                </ng-select>
+             </div>
+             <!-- <button type="submit" class="submit-btn">Submit</button> -->
+        </div>
+    
+         
+    </form>
+    <div class="result w-100 d-flex justify-content-center align-items-cener">
+        <div class="amount">
+            <span class="from">{{ (converterForm.value.amount ? converterForm.value.amount : 0) + ' ' + converterForm.value.from}} =</span>
+            <span class="to">{{result + ' ' + converterForm.value.to}}</span>
+        </div>
+    </div>
+    <div *ngIf="isDetails" class="detail-links">
+        <button (click)="redirectToDetails()" type="button" class="submit-btn">Details</button>
+    </div>
+</div>

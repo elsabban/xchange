@@ -3,16 +3,27 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { DetailsPageComponent } from './pages/details-page/details-page.component';
+import { SharedModule } from './shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomePageComponent,
+    DetailsPageComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
