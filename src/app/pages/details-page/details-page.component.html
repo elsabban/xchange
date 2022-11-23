@@ -1,1 +1,70 @@
-<app-converter [isDetails]="true" (getRate)="setLatestRates($event)"></app-converter>
+<section class="details">
+    <div class="container-layout">
+        <button [routerLink]="['../']" class="back-btn">back To Home</button>
+        <div class="converter-holder py-section">
+            <app-converter [selectedCurrencies]="{from:fromCurrency,to:toCurrency}" [isDetails]="true"></app-converter>
+        </div>
+        <div class="details-body py-section d-flex justify-content-between align-items-center">
+            <div class="detail-box w-40">
+                <h2 class="title text-center">{{allCurrencies[fromCurrency]}}</h2>
+                <p class="fw-bold text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                     Nulla varius non nibh sit amet efficitur. Cras sit amet vehicula mi. Nullam gravida
+                      dui eu ante pulvinar, vitae pulvinar magna aliquam. Nam at elementum arcu. Cras 
+                      aliquet ut enim ac faucibus. Integer sit amet nulla ut metus accumsan sagittis. 
+                      Nam euismod ligula ut magna vestibulum volutpat. Vivamus tortor velit, accumsan 
+                      at enim vitae, porttitor finibus augue. Sed facilisis eu ante id blandit. 
+                      In placerat mauris vitae lacinia sodales.</p> 
+                         
+            </div>
+
+            <div class="detail-box w-40">
+                <h2 class="title text-center">{{allCurrencies[toCurrency]}}</h2>
+                <p class="fw-bold text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                     Nulla varius non nibh sit amet efficitur. Cras sit amet vehicula mi. 
+                     Nullam gravida dui eu ante pulvinar, vitae pulvinar magna aliquam. Nam at
+                      elementum arcu. Cras aliquet ut enim ac faucibus. Integer sit amet nulla u
+                      t metus accumsan sagittis. Nam euismod ligula ut magna vestibulum volutpat. 
+                      Vivamus tortor velit, accumsan at enim vitae, porttitor finibus augue. Sed fac
+                      ilisis eu ante id blandit. In placerat mauris vitae lacinia sodales.</p>    
+            </div>
+        </div>
+        <!-- -------------------------- -->
+        <h2 class="text-center clr-gold">Historical Rates</h2>
+        <div class="historical-values py-section d-flex justify-content-center align-items-top">
+            <div class="last-day">
+                <h3 class="clr-gold fw-bold">Last Day</h3>
+                <hr>
+                <p class="history-value fw-bold">{{fromCurrency + ' = ' + (lastDay | number : '1.2-2') + ' ' + toCurrency}}</p> 
+            </div>
+            <div class="last-month">
+                <h3 class="clr-gold fw-bold">Last Month</h3>
+                <hr>
+                <p class="history-value fw-bold">{{fromCurrency + ' = ' + (lastMonth | number : '1.2-2') + ' ' + toCurrency}}</p>
+            </div>
+            <div class="last-year">
+                <h3 class="clr-gold fw-bold">Last Year</h3>
+                <hr>
+                <p class="history-value fw-bold">{{fromCurrency + ' = ' + (lastYear | number : '1.2-2') + ' ' + toCurrency}}</p>
+            </div>
+        </div>
+
+        <!-- ------------------------------------------------------ -->
+        <h2 class="text-center clr-gold">Compare to other currencies</h2>
+        <div class="varous-coversion py-section w-100 d-flex justify-content-even align-items-cener">
+            <div class="side">
+                <ul class="list-unstyled w-100">
+                    <li class="d-flex justify-content-between align-items-center clr-red"><span></span></li>
+                    <!-- <hr> -->
+                    <li class="d-flex justify-content-between align-items-center" *ngFor="let item of resultCrncyArr"><span class="left">{{' 1 ' + fromCurrency}}</span><span>{{item.value | number : '1.2-2'}} {{item.currency}}</span></li>
+                </ul>
+            </div>
+            <div class="side">
+                <ul class="list-unstyled w-100">
+                    <!-- <li class="d-flex justify-content-between align-items-center clr-red"><span></span></li>                                                                 item.value < 1 ? (1 * item.value) : (1/item.value) -->
+                    <!-- <hr> -->
+                    <li class="d-flex justify-content-between align-items-center" *ngFor="let item of resultCrncyArr"><span class="left">{{' 1 ' +  item.currency}}</span><span>{{1/item.value | number : '1.2-2'}} {{fromCurrency}}</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from './utilities/services/http.service';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +6,9 @@ import { HttpService } from './utilities/services/http.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(private http:HttpService) {}
+  constructor() {}
   ngOnInit(): void {
- 
-    
+
   }
   title = 'xchange';
 }

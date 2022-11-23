@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { forkJoin } from 'rxjs';
+import currencies from 'src/app/utilities/currencies';
 import { HttpService } from 'src/app/utilities/services/http.service';
 
 @Component({
@@ -10,16 +11,15 @@ import { HttpService } from 'src/app/utilities/services/http.service';
 export class HomePageComponent {
   constructor(private http:HttpService) {}
     payload:any;
+    allCurrency:any = currencies.allCurrencies
     amountsList:number[] = [1,5,10,20,30]
     fromRate:number = 0;
-    toRate:number = 0;
     setAmountListRates(event:any) {
       this.payload = event
-      forkJoin([this.http.getConvertionRate(event.from,event.to),this.http.getConvertionRate(event.to,event.from)]).subscribe(
+      this.http.getConvertionRate(event.from,event.to).subscribe(
         (res:any) => {
-          console.log(res)
-           this.fromRate = res[0].conversion_rate;
-           this.toRate = res[1].conversion_rate;
+           this.fromRate = res.conversion_rate;
+           
         }
       ) 
       

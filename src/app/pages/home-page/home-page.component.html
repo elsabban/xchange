@@ -1,17 +1,24 @@
 <section class="home">
-    <h1>Banque Misr Currency Converter</h1>
-<app-converter (getRate)="setAmountListRates($event)"></app-converter>
-
-<div *ngIf="payload" class="varous-coversion w-100 d-flex justify-content-even align-items-cener">
-    <div class="side">
-        <ul class="list-unstyled w-100">
-            <li class="d-flex justify-content-between align-items-center" *ngFor="let item of amountsList"><span class="left">{{item  + ' ' + payload.from }}</span><span>{{(item * fromRate)}} {{payload.to}}</span></li>
-        </ul>
+    <div class="container-layout">
+        <h1>Banque Misr Currency Converter</h1>
+        <app-converter (convertedCurrencies)="setAmountListRates($event)"></app-converter>
+        
+        <div *ngIf="payload" class="varous-coversion w-100 d-flex justify-content-even align-items-cener">
+            <div class="side">
+                <ul class="list-unstyled w-100">
+                    <li class="d-flex justify-content-between align-items-center clr-red"><span>{{allCurrency[payload.from]}}</span><span>{{allCurrency[payload.to]}}</span></li>
+                    <hr>
+                    <li class="d-flex justify-content-between align-items-center" *ngFor="let item of amountsList"><span class="left">{{(item | number : '1.2-2') + ' ' + payload.from }}</span><span>{{(item * fromRate) | number : '1.2-2'}} {{payload.to}}</span></li>
+                </ul>
+            </div>
+            <div class="side">
+                <ul class="list-unstyled w-100">
+                    <li class="d-flex justify-content-between align-items-center clr-red"><span>{{allCurrency[payload.to]}}</span><span>{{allCurrency[payload.from]}}</span></li>
+                    <hr>
+                    <li class="d-flex justify-content-between align-items-center" *ngFor="let item of amountsList"><span class="left">{{ (item | number : '1.2-2') + ' ' +  payload.to}}</span><span>{{(item / fromRate) | number : '1.2-2'}} {{payload.from}}</span></li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="side">
-        <ul class="list-unstyled w-100">
-            <li class="d-flex justify-content-between align-items-center" *ngFor="let item of amountsList"><span class="left">{{ item + ' ' +  payload.to}}</span><span>{{(item * toRate)}} {{payload.from}}</span></li>
-        </ul>
-    </div>
-</div>
+   
 </section>

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import currencies from 'src/app/utilities/currencies';
 import { HttpService } from 'src/app/utilities/services/http.service';
 
 @Component({
@@ -9,10 +10,11 @@ import { HttpService } from 'src/app/utilities/services/http.service';
 })
 export class ConverterComponent implements OnInit {
   @Input() isDetails:boolean = false;
-  @Output() getRate:EventEmitter<any> = new EventEmitter()
+  @Input() selectedCurrencies:any;
+  @Output() convertedCurrencies:EventEmitter<any> = new EventEmitter()
   constructor(private http:HttpService){}
+  currencies:any = currencies.allCurrencies;
   converterForm!:FormGroup;
-  conversionRate!:number;
   data:any;
   result:number = 0
   options:any [] = [ "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", 
@@ -31,20 +33,32 @@ export class ConverterComponent implements OnInit {
             "XAF", "XAG", "XAU", "XCD", "XDR", "XOF", "XPD", "XPF", "XPT", "YER", "ZAR", "ZMW", "ZWL" ]
   ngOnInit(): void {
      this.converterForm = new FormGroup({
-      amount:new FormControl(0,Validators.required),
+      amount:new FormControl(1,Validators.required),
       from:new FormControl('USD',[Validators.required]),
       to:new FormControl('EGP',[Validators.required])
     })
- 
+    
+    if(this.isDetails) {
+      this.converterForm.controls['from'].setValue(this.selectedCurrencies.from)
+      this.converterForm.controls['to'].setValue(this.selectedCurrencies.to)
+    }
+    this.convert(this.converterForm) 
   }
   
   
   convert(form:FormGroup) {
+    if(form.value.amount <= 0) {
+      this.converterForm.controls['amount'].setErrors({'minValue':true})
+      this.result = 0
+      return
+    }else {
+      this.converterForm.controls['amount'].setErrors({'minValue':null})
+    }
     this.http.convert(form.value).subscribe(
       (res:any) => {
         this.data = res
         this.result = this.data.conversion_result
-        this.getRate.emit({
+        this.convertedCurrencies.emit({
           from:this.converterForm.value.from,
           to:this.converterForm.value.to
         })
@@ -62,7 +76,4 @@ export class ConverterComponent implements OnInit {
 
   }
 
-  redirectToDetails() {
-    
-  }
 } 
