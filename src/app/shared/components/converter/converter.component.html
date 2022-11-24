@@ -35,7 +35,7 @@
     <div class="result w-100 d-flex justify-content-center align-items-cener">
         <div class="amount">
             <span class="from">{{ (converterForm.value.amount ? converterForm.value.amount : 0) + ' ' + converterForm.value.from}} =</span>
-            <span class="to">{{(result | number : '1.2-2')+ ' ' + converterForm.value.to}}</span>
+            <span class="to">{{(result | number : '1.2-3')+ ' ' + converterForm.value.to}}</span>
         </div>
     </div>
     <div *ngIf="!isDetails && data" class="detail-links">

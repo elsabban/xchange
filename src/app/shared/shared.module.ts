@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { SharedRoutingModule } from './shared-routing.module';
 import { ConverterComponent } from './components/converter/converter.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 @NgModule({
@@ -15,9 +14,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
   ],
   imports: [
     CommonModule,
-    SharedRoutingModule,
     ReactiveFormsModule,
-    NgSelectModule
+    NgSelectModule,
+    AppRoutingModule
   ],
   exports:[
     ConverterComponent,
